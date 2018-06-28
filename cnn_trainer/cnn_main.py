@@ -14,11 +14,13 @@ test_x = test.ix[:, 1:].values.astype('int32')
 test_label = test.ix[:, 0].values.astype('int32')
 test_y = np_utils.to_categorical(test_label)
 
+train_x, test_x = cnn_model.reshape_input_data(train_x, test_x)
 
 batch_size = 25
 epochs = 2
 
 model = cnn_model.load_cnn_model()
+
 history = model.fit(train_x, train_y, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(test_x, test_y))
 
 model.save_weights('first_try.h5')
