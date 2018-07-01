@@ -23,7 +23,13 @@ model = cnn_model.load_cnn_model()
 
 history = model.fit(train_x, train_y, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(test_x, test_y))
 
-model.save_weights('first_try.h5')
+# save model
+# model_json = model.to_json()
+# with open("model.json", "w") as json_file:
+#    json_file.write(model_json)
+
+# save weight
+model.save('model.h5')
 
 score = model.evaluate(test_x, test_y, verbose=0)
 print('Test score:', score[0])

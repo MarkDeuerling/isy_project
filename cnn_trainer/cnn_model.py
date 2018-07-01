@@ -15,27 +15,30 @@ def reshape_input_data(x_train, x_test, row=28, cols=28):
 def load_cnn_model(classes=25):
     model = Sequential()
 
-    model.add(Conv2D(30, (3, 3), input_shape=(28, 28, 1), padding="same"))
+    model.add(Conv2D(32, (3, 3), input_shape=(28, 28, 1), padding="same"))
     model.add(Activation('relu'))
 
-    model.add(Conv2D(60, (3, 3)))
+
+    model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Conv2D(60, (3, 3)))
+    model.add(Conv2D(64, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
 
-    model.add(Conv2D(80, (3, 3), padding="same"))
+    model.add(Conv2D(64, (3, 3), padding="same"))
     model.add(Activation('relu'))
 
-    model.add(Conv2D(100, (3, 3)))  # kernel required?
+    model.add(Conv2D(128, (3, 3)))  # kernel required?
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
 
     model.add(Flatten())  # converts 3D feature maps to 1D feature vectors
+    model.add(Dense(900))
+    model.add(Activation('relu'))
     model.add(Dense(512))
     model.add(Activation('relu'))
     model.add(Dense(classes))
