@@ -17,7 +17,7 @@ test_y = np_utils.to_categorical(test_label)
 train_x, test_x = cnn_model.reshape_input_data(train_x, test_x)
 
 batch_size = 25
-epochs = 2
+epochs = 5
 
 model = cnn_model.load_cnn_model()
 
