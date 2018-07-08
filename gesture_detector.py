@@ -47,7 +47,7 @@ class_map = {
 
 cap = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_SIMPLEX
-fs = 10, 10, 380
+fs = 10, 10, 300
 while True:
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
