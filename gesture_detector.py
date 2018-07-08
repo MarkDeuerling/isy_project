@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
-import keras
-from keras.models import model_from_json, load_model
+from keras.models import model_from_json
 from keras.preprocessing import image
 
 # load json and create model
@@ -13,9 +12,6 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("cnn_trainer/good_results/weights.h5")
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-
-
-# print(dir(loaded_model))
 
 # load weights into new model
 # model = load_model("./cnn_trainer/model.h5")
@@ -51,17 +47,19 @@ class_map = {
 
 cap = cv2.VideoCapture(0)
 font = cv2.FONT_HERSHEY_SIMPLEX
+fs = 10, 10, 380
 while True:
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    img = cv2.resize(frame, (28, 28))
+    crop = frame[fs[1]:fs[1] + fs[2], fs[0]:fs[0] + fs[2]]
+    img = cv2.resize(crop, (28, 28))
     img = image.img_to_array(img)
     x = np.expand_dims(img, axis=0)
-    # prediction_array = loaded_model.predict(frame)
     classes = loaded_model.predict_classes(x, batch_size=25)
 
     als = class_map.get(classes[0])
-    frame = cv2.putText(frame, als, (20, 90), font, 4, (0xff, 0xff, 0xff), 2, cv2.LINE_AA)
+    frame = cv2.putText(frame, als, (520, 90), font, 4, (0xff, 0xff, 0xff), 2, cv2.LINE_AA)
+    frame = cv2.rectangle(frame, (fs[0], fs[1]), (fs[0] + fs[2], fs[1] + fs[2]), (0xff, 0xff, 0xff), 2)
     cv2.imshow('ALS', frame)
     keyInput = cv2.waitKey(1)
 
