@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from cnn_trainer import cnn_model
 from keras.utils import np_utils
+
 import plot_utils
 
 train = pd.read_csv("../source/sign_mnist_train.csv")
