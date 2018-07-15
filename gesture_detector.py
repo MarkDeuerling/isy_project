@@ -5,11 +5,11 @@ from keras.preprocessing import image
 
 # load json and create model
 
-json_file = open('cnn_trainer/good_results/model.json', 'r')
+json_file = open('cnn_trainer/model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-loaded_model.load_weights("cnn_trainer/good_results/weights.h5")
+loaded_model.load_weights("cnn_trainer/weights.h5")
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 
