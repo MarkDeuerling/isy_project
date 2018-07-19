@@ -9,55 +9,49 @@ def reshape_input_data(x_train, x_test, row=28, cols=28):
 
 
 def load_cnn_model(classes=25):
-    model = Sequential()
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
-    model.add(Dropout(0.20))
-    model.add(Dense(classes, activation='softmax'))
-
-
-
     # model = Sequential()
-    #
-    # #input
-    # model.add(Conv2D(32, (3, 3), input_shape=(28, 28, 1), padding="same"))
-    # model.add(Activation('relu'))
-    #
-    # model.add(Conv2D(32, (3, 3)))
-    # model.add(Activation('relu'))
+    # model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
     #
-    # model.add(Conv2D(64, (3, 3)))
-    # model.add(Activation('relu'))
+    # model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
     #
-    # model.add(Conv2D(64, (3, 3), padding="same"))
-    # model.add(Activation('relu'))
-    #
-    # model.add(Conv2D(128, (3, 3)))  # kernel required?
-    # model.add(Activation('relu'))
+    # model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
     # model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
     #
-    # model.add(Flatten())  # converts 3D feature maps to 1D feature vectors
-    # model.add(Dense(900))
-    # model.add(Activation('relu'))
-    # model.add(Dense(512))
-    # model.add(Activation('relu'))
-    #
-    # #output
-    # model.add(Dense(classes))
-    # model.add(Activation('sigmoid'))
+    # model.add(Flatten())
+    # model.add(Dense(128, activation='relu'))
+    # model.add(Dropout(0.20))
+    # model.add(Dense(classes, activation='softmax'))
+
+
+
+    model = Sequential()
+
+    #input
+    model.add(Conv2D(32, (8, 8), input_shape=(28, 28, 1), padding="same"))
+    model.add(Activation('relu'))
+
+    model.add(Conv2D(32, kernel_size=(5, 5), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+
+    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', padding="same"))
+
+    model.add(Conv2D(128, kernel_size=(3, 3), activation='relu'))  # kernel required?
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.5))
+
+    model.add(Flatten())  # converts 3D feature maps to 1D feature vectors
+    model.add(Dense(128))
+    model.add(Activation('relu'))
+
+    #output
+    model.add(Dense(classes))
+    model.add(Activation('sigmoid'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
