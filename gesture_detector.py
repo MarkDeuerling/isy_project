@@ -5,11 +5,11 @@ from keras.preprocessing import image
 
 # load json and create model
 
-json_file = open('cnn_trainer/model.json', 'r')
+json_file = open('cnn_trainer/model_mark.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-loaded_model.load_weights("cnn_trainer/weights.h5")
+loaded_model.load_weights("cnn_trainer/weights_mark.h5")
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 
@@ -57,10 +57,10 @@ while True:
     x = np.expand_dims(img, axis=0)
     classes = loaded_model.predict_classes(x, batch_size=25)
 
-    als = class_map.get(classes[0])
-    frame = cv2.putText(frame, als, (520, 90), font, 4, (0xff, 0xff, 0xff), 2, cv2.LINE_AA)
+    asl = class_map.get(classes[0])
+    frame = cv2.putText(frame, asl, (520, 90), font, 4, (0xff, 0xff, 0xff), 2, cv2.LINE_AA)
     frame = cv2.rectangle(frame, (fs[0], fs[1]), (fs[0] + fs[2], fs[1] + fs[2]), (0xff, 0xff, 0xff), 2)
-    cv2.imshow('ALS', frame)
+    cv2.imshow('ASL', frame)
     keyInput = cv2.waitKey(1)
 
     if keyInput == ord('q'):
