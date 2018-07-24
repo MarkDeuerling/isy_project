@@ -18,8 +18,8 @@ test_y = np_utils.to_categorical(test_label)
 
 train_x, test_x = cnn_model.reshape_input_data(train_x, test_x)
 
-batch_size = 128  # 25
-epochs = 30
+batch_size = 32
+epochs = 5
 
 model = cnn_model.load_cnn_model()
 
@@ -27,11 +27,11 @@ history = model.fit(train_x, train_y, batch_size=batch_size, epochs=epochs, verb
 
 # save model
 model_json = model.to_json()
-with open("model.json", "w") as json_file:
+with open("model_mark.json", "w") as json_file:
     json_file.write(model_json)
 
 # save weight
-model.save('weights.h5')
+model.save('weights_mark.h5')
 
 score = model.evaluate(test_x, test_y, verbose=0)
 print('Test score:', score[0])
