@@ -1,0 +1,4 @@
+loss: 0.0283 - acc: 0.9941 - val_loss: 0.2800 - val_acc: 0.9604
+Test score: 0.280047422651
+Test accuracy: 0.960401561629
+dict_keys(['acc', 'val_acc', 'val_loss', 'loss'])

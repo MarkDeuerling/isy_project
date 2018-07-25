@@ -46,7 +46,7 @@ def load_cnn_model(classes=25):
     model.add(Dropout(0.2))
 
     model.add(Flatten())  # converts 3D feature maps to 1D feature vectors
-    model.add(Dense(128))
+    model.add(Dense(625))  # 128 TODO: try higher auf 625
     model.add(Activation('relu'))
 
     #output
